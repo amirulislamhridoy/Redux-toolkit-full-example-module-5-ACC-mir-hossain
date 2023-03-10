@@ -27,6 +27,12 @@ async function run() {
             const data = await cursor.toArray()
             res.send(data)
         })
+        app.get("/product/:id", async(req, res) => {
+            const {id} = req.params
+            const query = {_id: ObjectId(id)}
+            const data = await products.findOne(query)
+            res.json(data).status(200)
+        })
         // filter api system
         app.get('/search', async (req, res) => {
             const name = req.query.name
