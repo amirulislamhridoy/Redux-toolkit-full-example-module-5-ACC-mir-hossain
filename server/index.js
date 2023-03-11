@@ -29,7 +29,7 @@ async function run() {
         })
         app.get("/product/:id", async(req, res) => {
             const {id} = req.params
-            const query = {_id: ObjectId(id)}
+            const query = {_id: new ObjectId(id)}
             const data = await products.findOne(query)
             res.json(data).status(200)
         })
@@ -53,10 +53,10 @@ async function run() {
         })
         
         app.delete('/remove/:id', async (req, res) => {
-            // 640b42af1361f88fa469e2b1
             const { id } = req.params
-            const query = { _id: ObjectId(id) };
+            const query = { _id: new ObjectId(id) };
             const result = await products.deleteOne(query);
+            console.log(result)
             res.json(result).status(200)
         })
 
